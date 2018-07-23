@@ -1,0 +1,2 @@
+# PreviewImageHandler
+一行代码即可生成缩略图的HttpHandler，支持裁剪、留白等不同模式
