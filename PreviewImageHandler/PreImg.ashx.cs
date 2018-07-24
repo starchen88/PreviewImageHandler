@@ -1,7 +1,7 @@
 ﻿//Author:Star Chen(techenstar@qq.com)
 //License:MIT License
 //Url:https://github.com/techenstar/PreviewImageHandler
-//Version:1.0.0
+//Version:1.0.1
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -16,9 +16,21 @@ namespace PreviewImageHandler
     /// </summary>
     public class PreImg : MicroAPI.MicroAPIAsync
     {
+        /// <summary>
+        /// 缩略图保存位置
+        /// </summary>
         public static string ThumbnailLocation = "~/PreImgTemp/";
+
+        /// <summary>
+        /// jpg压缩质量，0-100
+        /// </summary>
         public static byte Quality = 75;
+
+        /// <summary>
+        /// 留白背景色
+        /// </summary>
         public static Color LeaveWhiteColor = Color.White;
+
         static string[] supportedExt = new[] { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".tiff", ".exif" };
         public PreImg()
         {
@@ -63,7 +75,7 @@ namespace PreviewImageHandler
             string url, filepath;
             Ready(context, out width, out height, out filepath);
             var rootPath = context.Server.MapPath("~/");
-            string thumbnailPath = context.Server.MapPath(ThumbnailLocation) + filepath.Substring(rootPath.Length, filepath.Length - rootPath.Length); 
+            string thumbnailPath = context.Server.MapPath(ThumbnailLocation) + filepath.Substring(rootPath.Length, filepath.Length - rootPath.Length);
             thumbnailPath = thumbnailPath + "_" + width + "_" + height + "_" + Enum.GetName(modeType, mode) + ".jpg";
             if (File.Exists(thumbnailPath))
             {
@@ -163,7 +175,14 @@ namespace PreviewImageHandler
                 }
             }
         }
-
+        /// <summary>
+        /// 生成缩略图核心逻辑
+        /// </summary>
+        /// <param name="oldImage">源图片</param>
+        /// <param name="mode">缩放模式</param>
+        /// <param name="newWidth">宽度</param>
+        /// <param name="newHeight">高度</param>
+        /// <returns></returns>
         public static Bitmap GenerateThumbnail(Bitmap oldImage, PreviewImageMode mode, int newWidth, int newHeight)
         {
             if (newWidth <= 0 || newHeight <= 0)
