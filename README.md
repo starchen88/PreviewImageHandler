@@ -1,5 +1,7 @@
 # PreviewImageHandler
 
+# 该项目已不再维护，相关功能已转入[DotNetUtility](https://github.com/techenstar/DotNetUtility)
+
 一行代码即可生成缩略图的HttpHandler，支持裁剪、留白等不同模式
 
 ## 功能特性
